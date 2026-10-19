@@ -170,7 +170,7 @@ node scripts/validate.mjs
 
 ## GitHub Topics
 
-建好仓库后，在 **About → Topics** 里填：
+本仓库已经打上这些 Topics：
 
 `deepseek-harness` · `dsh` · `dsh-plugin` · `deepseek` · `cordis` · `cordis-plugin` · `electron` · `desktop` · `restart` · `windows`
 

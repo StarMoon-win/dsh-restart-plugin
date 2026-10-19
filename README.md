@@ -171,7 +171,7 @@ The browser half (`client.js`) is picked up on the next page load.
 
 ## GitHub topics
 
-Set these in **About → Topics** after creating the repository:
+This repository is tagged:
 
 `deepseek-harness` · `dsh` · `dsh-plugin` · `deepseek` · `cordis` · `cordis-plugin` · `electron` · `desktop` · `restart` · `windows`
 
