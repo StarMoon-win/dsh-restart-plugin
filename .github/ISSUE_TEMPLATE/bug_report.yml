@@ -1,0 +1,46 @@
+name: Bug report
+description: Report a problem with the restart button or the relauncher.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting. Please include the restart log — it usually explains the failure on its own.
+  - type: input
+    id: dsh-version
+    attributes:
+      label: DeepSeek Harness version
+      description: From the About dialog or the bundled `dsh` package version.
+      placeholder: 0.2.1-rc.2
+    validations:
+      required: true
+  - type: input
+    id: windows
+    attributes:
+      label: Windows version
+      placeholder: Windows 11 23H2
+    validations:
+      required: true
+  - type: dropdown
+    id: symptom
+    attributes:
+      label: What happens?
+      options:
+        - The button is missing
+        - Clicking shows "Restart failed"
+        - The app exits but does not reopen
+        - The app reopens but something else is wrong
+        - Installation problem
+    validations:
+      required: true
+  - type: textarea
+    id: log
+    attributes:
+      label: Restart log
+      description: Paste the last lines of `%TEMP%\dsh-restart\restart.log`.
+      render: text
+  - type: textarea
+    id: details
+    attributes:
+      label: Anything else
+      description: Screenshots, other plugins in the profile, and steps to reproduce.

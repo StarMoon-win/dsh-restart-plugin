@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "重启按钮",
+    "description": "在侧边栏底部添加重启操作：点击后完全退出并重新打开 DeepSeek Harness。"
+  }
+}

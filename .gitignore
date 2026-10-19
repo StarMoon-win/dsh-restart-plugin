@@ -1,0 +1,12 @@
+# Dependencies and build output
+node_modules/
+
+# Local verification artifacts
+work/
+*.log
+
+# Editors and operating systems
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

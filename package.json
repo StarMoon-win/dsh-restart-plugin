@@ -1,0 +1,63 @@
+{
+  "name": "dsh-restart",
+  "version": "1.0.0",
+  "description": "Sidebar restart button for DeepSeek Harness Desktop: one click fully quits and reopens the app.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Star_Moon_win (https://github.com/StarMoon-win)",
+  "homepage": "https://github.com/StarMoon-win/dsh-restart-plugin#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/StarMoon-win/dsh-restart-plugin.git"
+  },
+  "bugs": {
+    "url": "https://github.com/StarMoon-win/dsh-restart-plugin/issues"
+  },
+  "keywords": [
+    "deepseek",
+    "deepseek-harness",
+    "dsh",
+    "dsh-plugin",
+    "cordis",
+    "cordis-plugin",
+    "restart",
+    "desktop",
+    "electron",
+    "windows"
+  ],
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "helper.mjs",
+    "cordis.patch.yml",
+    "locale/*.json",
+    "icon.svg"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "dsh": {
+    "engines": {
+      "dsh": ">=0.2.0-rc.1"
+    },
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-slots",
+        "@deepseek-ai/dsh-client-locale"
+      ]
+    }
+  }
+}

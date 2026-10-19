@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Restart Button",
+    "description": "Adds a restart action at the sidebar foot that completely quits and reopens DeepSeek Harness."
+  }
+}
