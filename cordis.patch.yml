@@ -1,7 +1,7 @@
-# Bundle patch for dsh-restart.
+# Bundle patch for dsh-restart-desktop.
 #
 # One row mounts the Host half (the restart door); the package's `dsh.client`
 # block (package.json) serves and loads the browser half (the sidebar button).
 - insert:
-    - id: dsh-restart
-      name: dsh-restart
+    - id: dsh-restart-desktop
+      name: dsh-restart-desktop

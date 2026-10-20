@@ -5,7 +5,7 @@
 First release.
 
 - Sidebar footer action that restarts the DeepSeek Harness desktop application.
-- Host routes `GET /dsh-restart/status` and `POST /dsh-restart/restart`, fenced to
+- Host routes `GET /dsh-restart-desktop/status` and `POST /dsh-restart-desktop/restart`, fenced to
   loopback, same-origin requests.
 - Detached relauncher that stops the application process tree and starts the same
   executable with a clean environment, then verifies the new instance.

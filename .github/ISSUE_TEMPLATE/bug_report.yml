@@ -37,7 +37,7 @@ body:
     id: log
     attributes:
       label: Restart log
-      description: Paste the last lines of `%TEMP%\dsh-restart\restart.log`.
+      description: Paste the last lines of `%TEMP%\dsh-restart-desktop\restart.log`.
       render: text
   - type: textarea
     id: details

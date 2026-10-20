@@ -1,5 +1,5 @@
 /**
- * Host half of dsh-restart.
+ * Host half of dsh-restart-desktop.
  *
  * The DeepSeek Harness desktop shell owns the Electron main process, and no
  * IPC channel lets a plugin ask it to relaunch: the only Host-facing control
@@ -25,8 +25,8 @@ import { basename, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 /** Client-facing endpoints; keep in sync with client.js. */
-const STATUS_PATH = '/dsh-restart/status'
-const RESTART_PATH = '/dsh-restart/restart'
+const STATUS_PATH = '/dsh-restart-desktop/status'
+const RESTART_PATH = '/dsh-restart-desktop/restart'
 /** Time the helper waits so the click's HTTP answer leaves the Host first. */
 const RESTART_DELAY_MS = 1200
 /** One restart at a time; the guard clears itself if the helper never starts. */
@@ -129,7 +129,7 @@ async function scheduleRestart(target) {
   guardTimer = setTimeout(releaseGuard, RESTART_GUARD_MS)
   guardTimer.unref?.()
 
-  const directory = join(tmpdir(), 'dsh-restart')
+  const directory = join(tmpdir(), 'dsh-restart-desktop')
   const logPath = join(directory, 'restart.log')
   const requestPath = join(directory, 'request.json')
   try {
@@ -167,7 +167,7 @@ async function scheduleRestart(target) {
 }
 
 /**
- * `GET /dsh-restart/status` — whether this Host can restart its application.
+ * `GET /dsh-restart-desktop/status` — whether this Host can restart its application.
  *
  * @param {import('node:http').IncomingMessage} request - the probe.
  * @param {import('node:http').ServerResponse} response - JSON answer.
@@ -190,7 +190,7 @@ function statusHandler(request, response) {
 }
 
 /**
- * `POST /dsh-restart/restart` — stop the application and open it again.
+ * `POST /dsh-restart-desktop/restart` — stop the application and open it again.
  *
  * @param {import('node:http').IncomingMessage} request - the click.
  * @param {import('node:http').ServerResponse} response - JSON answer, sent
@@ -241,6 +241,6 @@ export function apply(ctx) {
         disposeRestart()
         disposeStatus()
       }
-    }, 'dsh-restart: routes')
+    }, 'dsh-restart-desktop: routes')
   })
 }

@@ -1,14 +1,14 @@
 window.__ModuleLoader__.load({
-  id: 'dsh-restart',
+  id: 'dsh-restart-desktop',
   factory(require) {
     const React = require('react')
     const h = React.createElement
 
     /** Client locale namespace; the same string keys locale/*.json document for the manager. */
-    const NS = 'dsh-restart'
+    const NS = 'dsh-restart-desktop'
     /** Keep in sync with index.js. */
-    const STATUS_PATH = '/dsh-restart/status'
-    const RESTART_PATH = '/dsh-restart/restart'
+    const STATUS_PATH = '/dsh-restart-desktop/status'
+    const RESTART_PATH = '/dsh-restart-desktop/restart'
 
     const zh = {
       'restart': '重启',
@@ -105,7 +105,7 @@ window.__ModuleLoader__.load({
             // state until this document goes away with it.
           })
           .catch((error) => {
-            console.error('[dsh-restart] restart failed', error)
+            console.error('[dsh-restart-desktop] restart failed', error)
             setPhase('failed')
             resetTimer.current = setTimeout(() => setPhase('idle'), 4000)
           })
@@ -142,12 +142,12 @@ window.__ModuleLoader__.load({
     return {
       inject: ['slots', 'locale'],
       apply(ctx) {
-        ctx.effect(() => ctx.locale.register(NS, { zh, en }), 'dsh-restart: dictionaries')
+        ctx.effect(() => ctx.locale.register(NS, { zh, en }), 'dsh-restart-desktop: dictionaries')
         // The slot name is a literal on purpose: registration names are read
         // statically when the browser bundle is assembled.
         ctx.slots.inject('sidebar.footer.action', () => ctx.slots.register({
           name: 'sidebar.footer.action',
-          id: 'dsh-restart',
+          id: 'dsh-restart-desktop',
           order: 30,
           locale: NS,
         }, RestartButton))

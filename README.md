@@ -1,9 +1,9 @@
-# dsh-restart
+# dsh-restart-desktop
 
 **A restart button for the [DeepSeek Harness](https://github.com/deepseek-ai) Desktop sidebar.**
 One click fully quits the Electron application and opens it again — no tray menu, no terminal, no hunting for the window.
 
-![dsh-restart icon](icon.svg)
+![dsh-restart-desktop icon](icon.svg)
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Platform](https://img.shields.io/badge/platform-Windows%20desktop-0078d4.svg)](#requirements)
@@ -21,7 +21,7 @@ One click fully quits the Electron application and opens it again — no tray me
 - **Lives where you expect it.** A row in the sidebar footer, directly above **Settings**; in the collapsed 56px rail it becomes a round icon button.
 - **Stays out of the way.** The button only renders when the Host reports that this is a Windows desktop app; in `dsh web` or on unsupported platforms it hides itself.
 - **No shell windows.** The relauncher is a detached Node process and a hidden PowerShell child; nothing flashes on screen.
-- **Evidence when it fails.** Every attempt appends to `%TEMP%\dsh-restart\restart.log`, and the launch is verified with a retry.
+- **Evidence when it fails.** Every attempt appends to `%TEMP%\dsh-restart-desktop\restart.log`, and the launch is verified with a retry.
 - **Localized.** English and Simplified Chinese UI text, display metadata for the plugin manager, and its own original icon.
 
 ## Requirements
@@ -44,13 +44,13 @@ Add the bundle to your profile (`~/.dsh/profiles/<profile>/package.json`) and re
 {
   "dependencies": {
     // ...your existing entries
-    "dsh-restart": "github:StarMoon-win/dsh-restart-plugin"
+    "dsh-restart-desktop": "github:StarMoon-win/dsh-restart-plugin"
   },
   "dsh": {
     "profile": {
       "bundles": [
         // ...your existing entries
-        "dsh-restart"
+        "dsh-restart-desktop"
       ]
     }
   }
@@ -69,15 +69,15 @@ Then point the profile at the checkout:
 
 ```jsonc
 "dependencies": {
-  "dsh-restart": "link:/absolute/path/to/dsh-restart-plugin"
+  "dsh-restart-desktop": "link:/absolute/path/to/dsh-restart-plugin"
 }
 ```
 
-and add `"dsh-restart"` to `dsh.profile.bundles`, or install the directory through the plugin manager.
+and add `"dsh-restart-desktop"` to `dsh.profile.bundles`, or install the directory through the plugin manager.
 
 ### Uninstall
 
-Remove `dsh-restart` from `dsh.profile.bundles` (and from `dependencies`), then restart the app.
+Remove `dsh-restart-desktop` from `dsh.profile.bundles` (and from `dependencies`), then restart the app.
 
 ## Usage
 
@@ -90,18 +90,18 @@ Remove `dsh-restart` from `dsh.profile.bundles` (and from `dependencies`), then 
 If the button shows `Restart failed`, wait a few seconds and try again, then read the log:
 
 ```
-%TEMP%\dsh-restart\restart.log
+%TEMP%\dsh-restart-desktop\restart.log
 ```
 
 ## How it works
 
 ```
 Sidebar button (client.js)
-   │  GET  /dsh-restart/status    → render only when supported
-   │  POST /dsh-restart/restart   → 202, then the page dies with the app
+   │  GET  /dsh-restart-desktop/status    → render only when supported
+   │  POST /dsh-restart-desktop/restart   → 202, then the page dies with the app
    ▼
 Host routes (index.js)
-   │  write  %TEMP%\dsh-restart\request.json
+   │  write  %TEMP%\dsh-restart-desktop\request.json
    │  spawn  helper.mjs  (detached, ELECTRON_RUN_AS_NODE=1)
    ▼
 Relauncher (helper.mjs)
@@ -129,7 +129,7 @@ The two routes are reachable only from the same machine and the same page:
 - `Host` must be a loopback authority (`127.0.0.1`, `localhost`, `[::1]`), which also refuses DNS rebinding;
 - when `Origin` is present it must match `Host`;
 - the headerless “loopback, no Host, no Origin” shape of the desktop document proxy is accepted;
-- restart requires `POST`; `GET /dsh-restart/restart` answers `405`.
+- restart requires `POST`; `GET /dsh-restart-desktop/restart` answers `405`.
 
 ## Development
 
@@ -151,7 +151,7 @@ To exercise the relauncher without touching the app, point a request file at a h
 
 A profile installed with `link:` points at your working tree. Host code is not hot-reloaded across that junction, so after editing `index.js` or `helper.mjs`:
 
-1. disable and re-enable `dsh-restart` in Settings → Plugins (or via the plugin manager), or
+1. disable and re-enable `dsh-restart-desktop` in Settings → Plugins (or via the plugin manager), or
 2. restart the app with the new button.
 
 The browser half (`client.js`) is picked up on the next page load.
@@ -160,8 +160,8 @@ The browser half (`client.js`) is picked up on the next page load.
 
 | Symptom | Check |
 | --- | --- |
-| No button in the sidebar | Is the profile the desktop one and the bundle in `dsh.profile.bundles`? Open `/dsh-restart/status` on the app origin; `supported` must be `true`. |
-| Button always says “Restart failed” | Read `%TEMP%\dsh-restart\restart.log`. A missing `launched pid=…` line means the helper could not start the executable. |
+| No button in the sidebar | Is the profile the desktop one and the bundle in `dsh.profile.bundles`? Open `/dsh-restart-desktop/status` on the app origin; `supported` must be `true`. |
+| Button always says “Restart failed” | Read `%TEMP%\dsh-restart-desktop\restart.log`. A missing `launched pid=…` line means the helper could not start the executable. |
 | Install fails with `timed out waiting for the writer lock` | A stale `package.json.lock` in the profile; restart the app so the recorded holder PID is gone, then install again. |
 | App exits but does not reopen | The log ends with `FAILED: the application did not come back`. Start the app manually and report the log. |
 

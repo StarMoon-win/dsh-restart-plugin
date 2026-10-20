@@ -1,5 +1,5 @@
 {
-  "name": "dsh-restart",
+  "name": "dsh-restart-desktop",
   "version": "1.0.0",
   "description": "Sidebar restart button for DeepSeek Harness Desktop: one click fully quits and reopens the app.",
   "type": "module",

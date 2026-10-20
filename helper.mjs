@@ -1,5 +1,5 @@
 /**
- * Detached relauncher for dsh-restart.
+ * Detached relauncher for dsh-restart-desktop.
  *
  * The Host writes a small request JSON and spawns this file with the Electron
  * executable in Node mode, detached from the application's process tree. This
